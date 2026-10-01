@@ -14,13 +14,119 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
     --foreground: #ededed;
   }
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
+  color: #1a1b1c;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.container{
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+button {
+ Cursor: pointer;
+}
+
+/* Home Page */
+
+.pageWrapper{
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 80px;
+  padding-right: 80px;
+  padding-bottom: 0px;
+}
+
+.chevron {
+  position: absolute;
+  top: 50%;
+  height: 70%;
+  width: 20%; /* How far tip reaches */
+  aspect-ratio: 1 / 2;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.chevronLeft {
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.chevronRight {
+  right: 0;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+.chevron polyline {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.discoverWrapper,
+.homeTitle,
+.testWrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.discoverWrapper,
+.testWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.discoverButton,
+.testButton {
+  background: none;
+  border: none;
+  padding: 0;
+  text-transform: uppercase;
+  color: #1a1b1c;
+}
+
+.diamond {
+  fill: none;
+  stroke: #111;
+  stroke-width: 1;
+}
+
+.arrow {
+  fill: #111;
+}
+
+.buttonArrow {
+  transition: transform 0.3s ease-in-out;
+  transform-origin: center;
+}
+
+.buttonArrow:hover {
+  transform: scale(1.1);
+}
+
+.homeTitle{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0, 50px;
+}
+
+.homeTitleText{
+  font-size: 80px;
+}
+
+.homePageText{
+  text-align: center;
+  margin-top: 20px;
 }
