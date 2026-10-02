@@ -27,6 +27,9 @@ body {
 .container{
   max-width: 100%;
   margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 button {
@@ -36,14 +39,16 @@ button {
 /* Home Page */
 
 .pageWrapper{
+  position: relative;
+  overflow: hidden;
+  flex: 1;
   width: 100%;
-  min-height: 100vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-left: 80px;
   padding-right: 80px;
-  padding-bottom: 0px;
+  padding-bottom: 0;
 }
 
 .chevron {
@@ -59,11 +64,13 @@ button {
 .chevronLeft {
   left: 0;
   transform: translateY(-50%);
+  transition: opacity 0.5s ease-in-out;
 }
 
 .chevronRight {
   right: 0;
   transform: translateY(-50%) scaleX(-1);
+  transition: opacity 0.5s ease-in-out;
 }
 
 .chevron polyline {
@@ -85,6 +92,7 @@ button {
   display: flex;
   align-items: center;
   gap: 10px;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .discoverButton,
@@ -107,19 +115,66 @@ button {
 }
 
 .buttonArrow {
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out; 
   transform-origin: center;
 }
 
-.buttonArrow:hover {
+.discoverWrapper:hover .buttonArrow {
   transform: scale(1.1);
+}
+
+.testWrapper:hover .buttonArrow {
+  transform: scale(1.1);
+}
+
+.pageWrapper:has(.testWrapper:hover) .home {
+  transform: translateX(-300px);
+}
+
+.pageWrapper:has(.testWrapper:hover) .chevronLeft,
+.pageWrapper:has(.testWrapper:hover) .discoverWrapper {
+  opacity: 0;
+}
+
+.pageWrapper:has(.testWrapper:hover) .home2 {
+  transform: translateX(-385px);
+}
+
+.pageWrapper:has(.discoverWrapper:hover) .home {
+  transform: translateX(300px);
+}
+
+.pageWrapper:has(.discoverWrapper:hover) .home2 {
+  transform: translateX(385px);
+}
+
+.pageWrapper:has(.discoverWrapper:hover) .chevronRight,
+.pageWrapper:has(.discoverWrapper:hover) .testWrapper {
+  opacity: 0;
+}
+
+.home,
+.home2 {
+  transition: transform 0.6s ease-in-out;
 }
 
 .homeTitle{
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0, 50px;
+  padding: 0 50px;
+  line-height: 1.2;
+  animation: fadeIn 1s ease-in;
+  transition: transform 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .homeTitleText{
@@ -127,6 +182,135 @@ button {
 }
 
 .homePageText{
+  position: absolute;
+  top: 85%;
+  padding-left: 100px;
+  line-height: 1.2;
+}
+
+/* Header */
+
+.headerWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px 0 40px;
+  font-size: 12px;
+}
+
+.skinstricIntro {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.codeButton {
+  background: black;
+  border: none;
+  padding: 8px;
+  text-transform: uppercase;
+  color: white;
+}
+
+.skinstricIntro {
+  font-weight: bold;
+}
+
+.skinstricIntroTitle{
+  opacity: 70%;
+}
+
+/* Testing Page */
+
+.squareWrapper {
+
+}
+
+.square1 {
+  border: dotted 1px blue;
+  height: 450px;
+  width: 450px;
+  animation: spin 80s linear infinite;
+}
+
+.square2 {
+  border: dotted 1px green;
+  height: 500px;
+  width: 500px;
+  animation: spin 83s linear infinite;
+}
+
+.square3 {
+  border: dotted 1px red;
+  height: 550px;
+  width: 550px;
+  animation: spin 87s linear infinite;
+}
+
+.square1,
+.square2,
+.square3 {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  pointer-events: none;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.testingTitle {
+  padding: 40px;
+}
+
+.clickText {
+  font-size: 20px;
+  opacity: 0.3;
+}
+
+.testingTextWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin-top: 250px;
+  position: relative;
+  z-index: 1;
+}
+
+.testingNameBox {
+  width: 100%;
+  max-width: 450px;
+  margin-top: 30px;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+  background: transparent;
   text-align: center;
-  margin-top: 20px;
+  font-size: 55px;
+}
+
+textarea {
+  resize: none;
+  overflow: hidden;
+}
+
+.introInput {
+  font-size: 45px;
+}
+
+textarea::placeholder {
+  font-size: 55px;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
