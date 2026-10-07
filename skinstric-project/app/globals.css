@@ -220,30 +220,26 @@ button {
   opacity: 70%;
 }
 
-/* Testing Page */
-
-.squareWrapper {
-
-}
+/* Squares */
 
 .square1 {
   border: dotted 1px blue;
-  height: 450px;
-  width: 450px;
+  height: calc(450px * var(--square-scale, 1));
+  width: calc(450px * var(--square-scale, 1));
   animation: spin 80s linear infinite;
 }
 
 .square2 {
   border: dotted 1px green;
-  height: 500px;
-  width: 500px;
+  height: calc(500px * var(--square-scale, 1));
+  width: calc(500px * var(--square-scale, 1));
   animation: spin 83s linear infinite;
 }
 
 .square3 {
   border: dotted 1px red;
-  height: 550px;
-  width: 550px;
+  height: calc(550px * var(--square-scale, 1));
+  width: calc(550px * var(--square-scale, 1));
   animation: spin 87s linear infinite;
 }
 
@@ -265,8 +261,14 @@ button {
   }
 }
 
+/* Testing Page */
+
 .testingTitle {
-  padding: 40px;
+  padding: 30px;
+}
+
+.testingTitleText {
+  font-size: 14px;
 }
 
 .clickText {
@@ -279,7 +281,7 @@ button {
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  margin-top: 250px;
+  margin-top: 220px;
   position: relative;
   z-index: 1;
 }
@@ -313,4 +315,224 @@ textarea::placeholder {
   display: flex;
   align-items: center;
   gap: 10px;
+  padding-left: 40px;
+  position: absolute;
+  top: 90%;
+  transition: transform 0.3s ease-in-out; 
+}
+
+.backButton:hover .buttonArrow {
+  transform: scale(1.1);
+}
+
+.statusText {
+  font-size: 40px;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.thankYou {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 1s ease-in;
+}
+
+.dots::after {
+  content: "";
+  animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+  0% { content: ""; }
+  25% { content: "."}
+  50% { content: ".."}
+  75% { content: "..."}
+}
+
+.proceedButton {  
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 40px;
+  position: absolute;
+  top: 90%;
+  left: 90%;
+  transition: transform 0.3s ease-in-out;
+  animation: fadeRight 1s ease-in;
+}
+
+.proceedButton:hover .buttonArrow {
+  transform: scale(1.1);
+}
+
+@keyframes fadeRight {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.robotoText {
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+
+/* Result Page */
+
+.resultTitleText {
+  font-size: 14px;
+  padding: 20px 40px;
+}
+
+.resultSquares {
+  display: flex;
+  justify-content: center;
+  gap: 400px;
+  margin-top: 200px;
+}
+
+.squareSlot {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+.squareWrapperInline {
+  position: relative;
+  width: calc(550px * var(--square-scale, 1));
+  height: calc(550px * var(--square-scale, 1));
+  pointer-events: none;
+}
+
+/* Result Buttons */
+
+.resultButtons {
+  z-index: 2;
+}
+
+.scanOption {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  left: 29%;
+  top: 42%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.scanOption:hover {
+  transform: scale(1.1);
+}
+
+.cameraIcon {
+  display: block;
+}
+
+
+.scanLine {
+  position: absolute;
+  top: 25px;
+  left: 100px;
+  width: 80px;
+  height: 1px;
+  background: #666;
+  transform-origin: left center;
+  transform: rotate(-40deg);
+}
+
+.scanLine::after {
+  content: "";
+  position: absolute;
+  right: -3px;
+  top: -3px;
+  width: 6px;
+  height: 6px;
+  border: 1px solid #111;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.scanLabel {
+  position: absolute;
+  top: -45px;
+  left: 170px;
+  font-size: 14px;
+  line-height: 1.7;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.galleryOption {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  left: 64%;
+  top: 42%;
+  transition: transform 0.3s ease-in-out;
+}
+
+ .galleryOption:hover {
+  transform: scale(1.1);
+ }
+
+.galleryLine {
+  position: absolute;
+  top: 100px;
+  left: 22px;
+  width: 60px;
+  height: 1px;
+  background: #666;
+  transform-origin: left center;
+  transform: rotate(135deg);
+}
+
+.galleryLine::after {
+  content: "";
+  position: absolute;
+  right: -3px;
+  top: -3px;
+  width: 6px;
+  height: 6px;
+  border: 1px solid #111;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.galleryLabel {
+  position: absolute;
+  top: 136px;
+  right: 145px;
+  font-size: 14px;
+  line-height: 1.7;
+  text-align: right;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.scanButton,
+.galleryButton {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: inherit;
+}
+
+.previewFile {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 10%;
+  left: 90%;
+}
+
+.fileName {
+  font-size: 12px;
+  text-align: center;
 }
