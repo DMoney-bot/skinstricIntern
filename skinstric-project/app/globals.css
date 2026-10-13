@@ -223,7 +223,7 @@ button {
 /* Squares */
 
 .square1 {
-  border: dotted 1px blue;
+  border: dotted 1px gray;
   height: calc(450px * var(--square-scale, 1));
   width: calc(450px * var(--square-scale, 1));
   animation: spin 80s linear infinite;
@@ -231,7 +231,7 @@ button {
 }
 
 .square2 {
-  border: dotted 1px green;
+  border: dotted 1px gray;
   height: calc(500px * var(--square-scale, 1));
   width: calc(500px * var(--square-scale, 1));
   animation: spin 83s linear infinite;
@@ -239,7 +239,7 @@ button {
 }
 
 .square3 {
-  border: dotted 1px red;
+  border: dotted 1px gray;
   height: calc(550px * var(--square-scale, 1));
   width: calc(550px * var(--square-scale, 1));
   animation: spin 87s linear infinite;
