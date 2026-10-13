@@ -144,7 +144,7 @@ export default function summary() {
       <p className="summaryHint">
         If A.I. estimate is wrong, select the correct one.
       </p>
-      <Link href="/result" className="backButton">
+      <Link href="/select" className="backButton">
         <ButtonArrow />
         <div className="backButtonText robotoText">Back</div>
       </Link>

@@ -38,7 +38,7 @@ button {
 
 /* Home Page */
 
-.pageWrapper{
+.pageWrapper {
   position: relative;
   overflow: hidden;
   flex: 1;
@@ -46,8 +46,8 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 80px;
-  padding-right: 80px;
+  padding-left: 2%;
+  padding-right: 2%;
   padding-bottom: 0;
 }
 
@@ -284,7 +284,7 @@ button {
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  margin-top: 220px;
+  margin-top: 125px;
   position: relative;
   z-index: 1;
 }
@@ -358,9 +358,9 @@ textarea::placeholder {
   align-items: center;
   gap: 10px;
   padding-left: 40px;
-  position: absolute;
-  top: 90%;
-  left: 90%;
+  position: fixed;
+  bottom: 30px;
+  right: 40px;
   transition: transform 0.3s ease-in-out;
   animation: fadeRight 1s ease-in;
 }
@@ -397,8 +397,8 @@ textarea::placeholder {
 .resultSquares {
   display: flex;
   justify-content: center;
-  gap: 400px;
-  margin-top: 200px;
+  gap: clamp(250px, 20vh, 400px);
+  margin-top: 125px;
 }
 
 .squareSlot {
@@ -562,6 +562,8 @@ textarea::placeholder {
 
 .selectTitleWrapper {
   padding: 20px 40px;
+  line-height: 1.1;
+  flex-shrink: 0;
 }
 
 .selectSubtitle {
@@ -640,9 +642,9 @@ textarea::placeholder {
   align-items: center;
   gap: 10px;
   padding-left: 40px;
-  position: absolute;
-  top: 90%;
-  left: 87%;
+  position: fixed;
+  bottom: 30px;
+  right: 40px;
   transition: transform 0.3s ease-in-out;
 }
 
@@ -653,15 +655,16 @@ textarea::placeholder {
 /* Summary Page */
 
 .titleWrapper {
-  padding: 20px 40px;
+  padding: 6px 40px;
   display: flex;
   flex-direction: column;
   line-height: 50px;
 }
 
 .summaryTitle {
-  font-size: 80px;
+  font-size: clamp(44px, 9vh, 72px);
   font-weight: 200;
+  line-height: 1;
 }
 
 .summarySubTitle2 {
@@ -670,8 +673,10 @@ textarea::placeholder {
 }
 
 .demoBoxes {
-  padding: 20px 40px;
+  padding: 5px 40px;
   display: flex;
+  flex: 1;
+  min-height: 0;
   gap: 20px;
 }
 
@@ -679,6 +684,11 @@ textarea::placeholder {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.demoBoxesSection2,
+.demoBoxesSection3 {
+  height: 100%;
 }
 
 .demoBox {
@@ -692,6 +702,14 @@ textarea::placeholder {
   color: #fff;
 }
 
+.summaryWrapper {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-bottom: 40px;
+}
+
 .smallBox {
   height: 100px;
   width: 200px;
@@ -703,8 +721,9 @@ textarea::placeholder {
 
 .bigBox {
   position: relative;
-  width: 1200px;
-  height: 550px;
+  width: 100%;
+  min-width: 0;
+  height: 100%;
 }
 
 .bigBoxTitle {
@@ -717,8 +736,9 @@ textarea::placeholder {
 }
 
 .mediumBox {
-  width: 400px;
-  height: 550px;
+  width: clamp(280px, 25vw, 400px);
+  height: 100%;
+  overflow-y: auto;
   border-top: 1px solid black;
 }
 
@@ -770,8 +790,10 @@ textarea::placeholder {
   position: absolute;
   right: 20px;
   bottom: 20px;
-  width: 380px;
-  height: 380px;
+  width: auto;
+  max-height: 380px;
+  aspect-ratio: 1;
+  height: 75%;
   border: none;
   outline: none;
 }
@@ -800,13 +822,14 @@ textarea::placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 40px;
+  font-size: clamp(28px, 5vh, 40px);
 }
 
 .ringText small {
-  font-size: 20px;
+  font-size: 0.5em;
   align-self: flex-start;
-  margin-top: 165px;
+  margin-top: 135px;
+  line-height: 1;
 }
 
 /* Camera Page */
@@ -835,22 +858,23 @@ textarea::placeholder {
 
 .cameraStageIcon {
   position: absolute;
-  left: 32%;
-  top: 25%;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   scale: 0.8;
 }
 
 .cameraSetup {
-  position: absolute;
-  left: 46%;
-  top: 55%;
+  position: static;
   font-size: 16px;
 }
 
 .cameraInstructions {
   position: absolute;
-  left: 37%;
-  bottom: 20%;
+  left: 50%;
+  bottom: 12%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -867,4 +891,106 @@ textarea::placeholder {
 .cameraStageIcon .scanLine,
 .cameraStageIcon .scanLabel {
   display:  none;
+}
+
+/* Capture Page */
+
+.captureWrapper {
+  position: relative;
+  min-height: 100vh;
+}
+
+.captureStage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 20px;
+}
+
+.captureVideo {
+  width: 100%;
+  max-width: 1000px;
+  max-height: 65vh;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: #f1f2f4;
+}
+
+video.captureVideo {
+  transform: scaleX(-1);
+}
+
+.captureShutter {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid #111;
+  background: #fff;
+  box-shadow: inset 0 0 0 5px #fff, inset 0 0 0 40px #111;
+  transition: transform 0.2s ease-in-out;
+}
+
+.captureShutter:hover {
+  transform: scale(1.1);
+}
+
+.captureActions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.captureButtons {
+  display: flex;
+  gap: 12px;
+}
+
+.captureBtn {
+  padding: 10px 20px;
+  border: 1px solid #111;
+  background: #fff;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.captureBtnPrimary {
+  background: #111;
+  color: #fff;
+}
+
+.captureStatus {
+  font-size: 16px;
+}
+
+.captureError {
+  color: #b00020;
+  font-size: 14px;
+}
+
+.captureFrame {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.captureText {
+  position: absolute;
+  left: 50%;
+  bottom: 200px;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-align: center;
+  white-space: nowrap;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
 }
