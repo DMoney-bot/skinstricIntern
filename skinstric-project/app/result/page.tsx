@@ -17,9 +17,10 @@ export default function result() {
 
   const openGallery = () => galleryInputRef.current?.click();
 
-  const API_URL = "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo"
+  const API_URL =
+    "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo";
 
-  const fileToBase64 = (file: File) => 
+  const fileToBase64 = (file: File) =>
     new Promise<string>((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = () => resolve((reader.result as string).split(",")[1]);
@@ -27,32 +28,32 @@ export default function result() {
       reader.readAsDataURL(file);
     });
 
-    const handleFile = async (e:React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0];
-      if (!file) return;
-      e.target.value = "";
+  const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    e.target.value = "";
 
-      setFileName(file.name);
-      setPreview(URL.createObjectURL(file));
-      setLoading(true);
+    setFileName(file.name);
+    setPreview(URL.createObjectURL(file));
+    setLoading(true);
 
-      try {
-        const image = await fileToBase64(file);
-        const res = await fetch(API_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ image }),
-        });
-        if (!res.ok) throw new Error(`failed: ${res.status}`);
+    try {
+      const image = await fileToBase64(file);
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ image }),
+      });
+      if (!res.ok) throw new Error(`failed: ${res.status}`);
 
-        const json = await res.json();
-        sessionStorage.setItem("analysis", JSON.stringify(json.data));
-        router.push("/select");
-      } catch(err) {
-        console.error(err);
-        setLoading(false);
-      }
-    };
+      const json = await res.json();
+      sessionStorage.setItem("analysis", JSON.stringify(json.data));
+      router.push("/select");
+    } catch (err) {
+      console.error(err);
+      setLoading(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -76,9 +77,19 @@ export default function result() {
       <div className="resultTitle">
         <h1 className="robotoText resultTitleText">To start analysis</h1>
       </div>
-      <div className="resultSquares">
-        <Squares scale={0.5} inline />
-        <Squares scale={0.5} inline />
+      <div className="resultStage">
+        <div className="resultSlot">
+          <Squares scale={0.5} inline />
+          <Link href="/camera" className="resultIcon">
+            <ScanOption />
+          </Link>
+        </div>
+        <div className="resultSlot">
+          <Squares scale={0.5} inline />
+          <button type="button" className="resultIcon" onClick={openGallery}>
+            <GalleryOption />
+          </button>
+        </div>
       </div>
       <input
         ref={galleryInputRef}
@@ -87,19 +98,6 @@ export default function result() {
         onChange={handleFile}
         hidden
       />
-      <div className="resultButtons">
-        <Link href="/camera" className="scanButton">
-          <ScanOption />
-        </Link>
-        <button type="button" className="galleryButton" onClick={openGallery}>
-          <GalleryOption />
-        </button>
-      </div>
-      {/* <div className="previewFile">
-        <p className="robotoText">Preview</p>
-        {preview && <img src={preview} alt="selected upload" width={120} />}
-        {fileName && <p className="fileName">{fileName}</p>}
-      </div> */}
       <Link href="/testing" className="backButton">
         <ButtonArrow />
         <div className="backButtonText">Back</div>

@@ -270,6 +270,12 @@ button {
   padding: 30px;
 }
 
+.testingWrapper {
+  position: relative;
+  height: 100dvh;
+  overflow: hidden;
+}
+
 .testingTitleText {
   font-size: 14px;
 }
@@ -280,17 +286,23 @@ button {
 }
 
 .testingTextWrapper {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding: 20px;
-  margin-top: 125px;
-  position: relative;
-  z-index: 1;
+  margin-top: 0;
+  padding: 0;
+  pointer-events: none;
+}
+
+.testingTextWrapper > * {
+  pointer-events: auto;
 }
 
 .testingNameBox {
-  width: 100%;
+  width: min(450px, 90vw);
   max-width: 450px;
   margin-top: 30px;
   border: none;
@@ -394,19 +406,6 @@ textarea::placeholder {
   padding: 20px 40px;
 }
 
-.resultSquares {
-  display: flex;
-  justify-content: center;
-  gap: clamp(250px, 20vh, 400px);
-  margin-top: 125px;
-}
-
-.squareSlot {
-  position: relative;
-  width: 300px;
-  height: 300px;
-}
-
 .squareWrapperInline {
   position: relative;
   width: calc(550px * var(--square-scale, 1));
@@ -414,11 +413,50 @@ textarea::placeholder {
   pointer-events: none;
 }
 
-/* Result Buttons */
-
-.resultButtons {
-  z-index: 2;
+.resultWrapper {
+  position: relative;
+  height: 100dvh;
+  overflow: hidden;
 }
+
+.resultStage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  pointer-events: none;
+}
+
+.resultSlot {
+  position: relative;
+  flex: 1;
+  display: grid;
+  place-items: center;
+}
+
+.resultSlot > * {
+  grid-area: 1/1;
+}
+
+.resultIcon {
+  position: static;
+  transform: none;
+  width: 120px;
+  height: 120px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.resultSlot .scanOption,
+.resultSlot .galleryOption {
+  position: relative;
+  left: auto;
+  top: auto;
+}
+
+/* Result Buttons */
 
 .scanOption {
   position: absolute;
@@ -427,6 +465,12 @@ textarea::placeholder {
   left: 29%;
   top: 42%;
   transition: transform 0.3s ease-in-out;
+}
+
+.cameraStageIcon .scanOption {
+  position: relative;
+  left: auto;
+  top: auto;
 }
 
 .scanOption:hover {
@@ -516,15 +560,6 @@ textarea::placeholder {
   text-align: right;
   text-transform: uppercase;
   white-space: nowrap;
-}
-
-.scanButton,
-.galleryButton {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  text-align: inherit;
 }
 
 .previewFile {
@@ -854,14 +889,18 @@ textarea::placeholder {
   position: relative;
   width: 275px;
   height: 275px;
+  display: grid;
+  place-items: center;
+}
+
+.cameraSquares > * {
+  grid-area: 1/1;
 }
 
 .cameraStageIcon {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: static;
+  display: grid;
+  place-items: center;
   scale: 0.8;
 }
 
@@ -993,4 +1032,254 @@ video.captureVideo {
   white-space: nowrap;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
   pointer-events: none;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .testingWrapper,
+  .resultWrapper {
+    height: 100svh;
+  }
+
+  .testingWrapper .backButton,
+  .testingWrapper .proceedButton {
+    position: fixed;
+    top: auto;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.95);
+    z-index: 20;
+  }
+
+  .testingWrapper .backButton    { left: 8px;  right: auto; }
+  .testingWrapper .proceedButton { right: 8px; left: auto; }
+  :root { --m: 0.55; }
+
+  html, body { overflow-x: hidden; }
+
+  .headerWrapper { padding: 14px 16px 0; font-size: 11px; }
+  .skinstricIntro { gap: 10px; }
+  .codeButton { padding: 6px 8px; }
+
+  .backButton,
+  .proceedButton,
+  .summaryButton {
+    position: fixed;
+    top: auto;
+    bottom: 12px;
+    padding: 4px 10px;
+    background: rgba(255, 255, 255, 0.9);
+    z-index: 5;
+  }
+  .backButton { left: 6px; right: auto; }
+  .proceedButton,
+  .summaryButton { right: 6px; left: auto; }
+
+  .square1 {
+    height: calc(450px * var(--square-scale, 1) * var(--m));
+    width:  calc(450px * var(--square-scale, 1) * var(--m));
+  }
+  .square2 {
+    height: calc(500px * var(--square-scale, 1) * var(--m));
+    width:  calc(500px * var(--square-scale, 1) * var(--m));
+  }
+  .square3 {
+    height: calc(550px * var(--square-scale, 1) * var(--m));
+    width:  calc(550px * var(--square-scale, 1) * var(--m));
+  }
+  .squareWrapperInline {
+    width:  calc(550px * var(--square-scale, 1) * var(--m));
+    height: calc(550px * var(--square-scale, 1) * var(--m));
+  }
+
+  .pageWrapper {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 28px;
+    padding: 0 16px 120px;
+  }
+  .chevron { display: none; }
+  .homeTitle { order: 1; padding: 0; }
+  .discoverWrapper { order: 2; }
+  .testWrapper { order: 3; }
+  .homeTitleText { font-size: clamp(36px, 11vw, 80px); }
+
+  .home,
+  .home2 { transform: none !important; }
+  .discoverWrapper,
+  .testWrapper { opacity: 1 !important; }
+
+  .homePageText {
+    top: auto;
+    bottom: 24px;
+    left: 0;
+    right: 0;
+    padding: 0 24px;
+    text-align: center;
+    font-size: 13px;
+  }
+
+  .testingTitle { padding: 16px; }
+  .testingNameBox { font-size: clamp(28px, 9vw, 55px); }
+  textarea::placeholder { font-size: clamp(28px, 9vw, 55px); }
+  .clickText { font-size: 16px; }
+  .statusText { font-size: clamp(24px, 7vw, 40px); }
+
+  /* ---------- Result ---------- */
+  .resultTitleText { padding: 16px; }
+  .resultStage {
+    flex-direction: column;
+    padding-top: 80px;
+  }
+  .resultIcon { 
+    width: 120px;
+    height: 120px;
+    scale: 0.7; 
+  }
+
+  .resultSlot .scanLine,
+  .resultSlot .galleryLine { display: none; }
+  .resultSlot .scanLabel,
+  .resultSlot .galleryLabel {
+    top: 100%;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    margin-top: 6px;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .loadingScreenText { font-size: 16px; }
+  
+  .previewFile {
+  top: 16px;
+  right: 16px;
+  left: auto;
+  width: 80px;
+  gap: 4px;
+}
+
+.previewFile p {
+  font-size: 10px;
+}
+
+.previewFile img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  object-position: top;
+}
+
+.fileName {
+  font-size: 9px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+  .cameraSquares {
+    width: calc(275px * var(--m));
+    height: calc(275px * var(--m));
+  }
+  .cameraStageIcon { scale: 0.55; }
+  .cameraStage { gap: 40px; }
+  .cameraSetup { font-size: 14px; }
+  .cameraInstructions {
+    left: 0;
+    right: 0;
+    bottom: 80px;
+    transform: none;
+    padding: 0 16px;
+    font-size: 12px;
+  }
+  .textRow {
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* ---------- Capture ---------- */
+  .captureWrapper { padding-bottom: 80px; }
+  .captureStage { padding: 12px; }
+  .captureVideo { aspect-ratio: 3 / 4; max-height: 60vh; }
+  .captureText {
+    bottom: 6%;
+    width: 90%;
+    white-space: normal;
+    font-size: 11px;
+  }
+
+  /* ---------- Select (diamonds) ---------- */
+  .selectWrapper { padding-bottom: 90px; }
+  .selectTitleWrapper { padding: 16px; }
+  .diamondGrid {
+    grid-template-columns: repeat(2, 110px);
+    grid-template-rows: repeat(2, 110px);
+    gap: 6px;
+    margin: 90px auto;
+  }
+  .hiddenSquare { width: 300px; height: 300px; }
+  .selectText1,
+  .selectText2,
+  .selectText3,
+  .selectText4 { font-size: 12px; }
+  .selectText2 { width: 100px; font-size: 12px; }
+  .selectText3 { width: 80px; }
+
+  .summaryWrapper {
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+    padding-bottom: 90px;
+  }
+  .titleWrapper { padding: 8px 16px; line-height: 1.2; }
+  .summaryTitle { font-size: clamp(36px, 11vw, 72px); }
+
+  .demoBoxes {
+    flex: none;
+    flex-direction: column;
+    padding: 8px 16px;
+    gap: 12px;
+  }
+
+  /* the three category buttons become one row */
+  .demoBoxesSection1 { flex-direction: row; gap: 8px; }
+  .smallBox {
+    flex: 1;
+    width: auto;
+    min-width: 0;
+    height: 80px;
+  }
+  .innerSmallBox { padding-left: 8px; gap: 8px; }
+  .innerSmallBox p {
+    font-size: 10px;
+    text-align: left;
+    overflow-wrap: anywhere;
+  }
+
+  .demoBoxesSection2,
+  .demoBoxesSection3 { height: auto; flex: none; }
+
+  .bigBox { height: 320px; }
+  .bigBoxTitle { font-size: 24px; top: 14px; left: 14px; }
+  .ringWrap {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 14px;
+    height: 70%;
+  }
+  .ringText small { margin-top: 80px; }   /* % sign offset; tweak if it looks off */
+
+  .mediumBox {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .confidenceRow { padding: 10px 16px; }
+
+  .summaryHint { font-size: 12px; margin: 8px 16px; }
 }
